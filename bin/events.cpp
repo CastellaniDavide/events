@@ -1,42 +1,50 @@
-/**
- * @file events.cpp
- *
- * @version 01.01 2020-11-13
- *
- * @brief Allenamento OIS2020
- *
- * @ingroup events
- * (Note: this needs exactly one @defgroup somewhere)
- *
- * @author Castellani Davide
- *
- * Contact: contacts@castellanidavide.it
- *
+/*
+ * This template is valid both in C and in C++,
+ * so you can expand it with code from both languages.
  */
 
-// Includes
 #include <bits/stdc++.h>
 using namespace std;
 
-// Variabiles
-int N;
+// constraints
+#define MAXN 50000
 
-// Main code
+// input data
+int N, V, i;
+int prices[MAXN], vouchers[MAXN];
+int result = 0;
+
 int main()
 {
-  // Cncomment the following lines if you want to read/write from files
-  // freopen("input.txt", "r", stdin);
-  // freopen("output.txt", "w", stdout);
+//  uncomment the following lines if you want to read/write from files
+    freopen("input.txt", "r", stdin);
+    freopen("output.txt", "w", stdout);
 
-  // Input
-  cin >> N;
+    assert(2 == scanf("%d %d", &N, &V));
+    for(i=0; i<N; i++)
+        assert(1 == scanf("%d", &prices[i]));
+    for(i=0; i<V; i++)
+        assert(1 == scanf("%d", &vouchers[i]));
 
-  // Code
-  // ...
+    //Sort
+    sort(prices, prices + N);
+    sort(vouchers, vouchers + N);
 
-  // Output
-  cout << N << endl;
+    // Code
+    for (int i = 0; i < N; ++i)
+    {
+        for (int j = 0; j < V; ++j)
+        {
+            if(vouchers[j] >= prices[i] && vouchers[i] != -1)
+            {
+                vouchers[i] = -1;
+                result++;
+                break;
+            }
 
-  // End
-  return 0;
+        }
+    }
+
+    printf("%d\n", result); // print the result
+    return 0;
 }
